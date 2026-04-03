@@ -38,20 +38,18 @@ public class SingleThreadWebServer {
         return;
       }
       log.info("The request: {}", requestLine);
-      String response = processRequest(requestLine);
-      Thread.sleep(100);
+      String response = processRequest();
       out.println("HTTP:/1.1 200 OK");
       out.println("Content-Type: text/plain");
       out.println("Content-Length: " + response.length());
-      out.println();
       out.println(response);
       out.flush();
-    } catch (IOException | InterruptedException ex) {
+    } catch (IOException ex) {
       log.error(ex.getMessage());
     }
   }
 
-  private static String processRequest(String requestLine) {
-    return "Hello from single-threaded server!";
+  private static String processRequest() {
+    return "The request processing result.";
   }
 }
